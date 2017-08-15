@@ -2,18 +2,44 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function Navigation(props){
+  return (
+    <nav>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
+  );
+}
+
+function HeroImage(props){
+  return (
+    <div className="heroImage">
+    </div>
+  );
+}
+
+function Section(props){
+  return(
+    <section className={`${props.title}-section`}>
+    <h1>{props.title}</h1>
+    </section>
+  );
+}
+
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <header>
+        <Navigation />
+        <HeroImage />
+  
+      <Section title="Home" />
+      <Section title="About" />
+      <Section title="Contact" />
+      </header>
     );
   }
 }
