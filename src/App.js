@@ -29,17 +29,56 @@ function Section(props){
   );
 }
 
+class ExperienceForm extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={value:"me"};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event){
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+    alert('You want to learn more about ' + this.state.value);
+  }
+
+  render(){
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Find out more about:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="me">Me</option>
+            <option value="marketing">My past in marketing</option>
+            <option value="development">My switch to frontend development</option>
+          </select>
+        </label>
+        <input type="submit" value="submit" />
+      </form>
+    )
+  }
+}
+
+
+
+
 class App extends Component {
   render() {
     return (
-      <header>
-        <Navigation />
-        <HeroImage />
-  
-      <Section title="Home" />
-      <Section title="About" />
-      <Section title="Contact" />
-      </header>
+      <section>
+        <header>
+          <Navigation />
+          <HeroImage />
+        </header>
+      <section>
+        <ExperienceForm />
+      </section>
+      </section>
     );
   }
 }
