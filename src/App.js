@@ -21,14 +21,6 @@ function HeroImage(props){
   );
 }
 
-function Section(props){
-  return(
-    <section className={`${props.title}-section`}>
-    <h1>{props.title}</h1>
-    </section>
-  );
-}
-
 class ExperienceForm extends React.Component {
   constructor(props){
     super(props);
@@ -44,8 +36,11 @@ class ExperienceForm extends React.Component {
 
   handleSubmit(event){
     event.preventDefault();
-    alert('You want to learn more about ' + this.state.value);
-  }
+    this.setState({
+      interest: this.state.value
+    });
+    return <showNextSection interest={this.state.interest}/>;
+}
 
   render(){
     return (
@@ -60,8 +55,25 @@ class ExperienceForm extends React.Component {
         </label>
         <input type="submit" value="submit" />
       </form>
-    )
+    );
   }
+};
+
+function showNextSection(props) {
+  console.log(this.props.interest);
+  if (this.props.interest === 'me'){
+    return <aboutMeSection />;
+  };
+  // if (interest === "marketing"){
+  //   return <p>You wanna know about marketing</p>;
+  // };
+  // if (interest === "development"){
+  //   return <p>You wanna know about code</p>;
+  // };
+}
+
+function aboutMeSection(props){
+  return <p>You wanna know about me!</p>;
 }
 
 
@@ -77,6 +89,7 @@ class App extends Component {
         </header>
       <section>
         <ExperienceForm />
+        <showNextSection />
       </section>
       </section>
     );
