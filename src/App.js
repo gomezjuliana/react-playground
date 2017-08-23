@@ -22,62 +22,46 @@ function HeroImage(props){
 }
 
 class ExperienceForm extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={value:"me"};
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event){
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event){
-    event.preventDefault();
-    this.setState({
-      interest: this.state.value
-    });
-    return <showNextSection interest={this.state.interest}/>;
-}
-
   render(){
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form>
         <label>
           Find out more about:
-          <select value={this.state.value} onChange={this.handleChange}>
+          <select value={this.props.sectionName} onChange={this.props.onSectionChange}>
             <option value="me">Me</option>
             <option value="marketing">My past in marketing</option>
             <option value="development">My switch to frontend development</option>
           </select>
         </label>
-        <input type="submit" value="submit" />
       </form>
     );
   }
 };
 
-function showNextSection(props) {
-  console.log(this.props.interest);
-  if (this.props.interest === 'me'){
-    return <aboutMeSection />;
-  };
-  // if (interest === "marketing"){
-  //   return <p>You wanna know about marketing</p>;
-  // };
-  // if (interest === "development"){
-  //   return <p>You wanna know about code</p>;
-  // };
+function Blurb(props){
+  return <p>{props.sectionName}</p>
 }
 
-function aboutMeSection(props){
-  return <p>You wanna know about me!</p>;
+class ContentSection extends React.Component{
+  constructor(props){
+    super(props);
+    this.state={value:"me"};
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+  
+  handleChange(event){
+    this.setState({value: event.target.value});
+  }
+
+  render(){
+    return (
+      <section>
+      <ExperienceForm onSectionChange={this.handleChange} sectionName={this.state.value}/>
+      <Blurb sectionName={this.state.value}/>
+    </section>
+  )}
 }
-
-
-
 
 class App extends Component {
   render() {
@@ -87,10 +71,7 @@ class App extends Component {
           <Navigation />
           <HeroImage />
         </header>
-      <section>
-        <ExperienceForm />
-        <showNextSection />
-      </section>
+        <ContentSection />
       </section>
     );
   }
