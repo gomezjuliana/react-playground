@@ -28,9 +28,9 @@ class ExperienceForm extends React.Component {
         <label>
           Find out more about:
           <select value={this.props.sectionName} onChange={this.props.onSectionChange}>
-            <option value="me">Me</option>
-            <option value="marketing">My past in marketing</option>
-            <option value="development">My switch to frontend development</option>
+            <option value="cats">Cats</option>
+            <option value="dogs">Dogs</option>
+            <option value="birds">Birds</option>
           </select>
         </label>
       </form>
@@ -39,13 +39,19 @@ class ExperienceForm extends React.Component {
 };
 
 function Blurb(props){
-  return <p>{props.sectionName}</p>
+  if (props.sectionName === "cats") {
+    return <p>Cats!</p>
+  } 
+  if (props.sectionName === "dogs") {
+    return <p>Dogs!</p>
+  }
+  else return <p>Birds!</p>
 }
 
 class ContentSection extends React.Component{
   constructor(props){
     super(props);
-    this.state={value:"me"};
+    this.state={value:"cats"};
 
     this.handleChange = this.handleChange.bind(this);
   }
